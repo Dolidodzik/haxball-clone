@@ -50,17 +50,51 @@ $("#msg").keypress(function(e) {if(e.which == 13) {sendMSG()}});
 $("#send").click(sendMSG);
 
 
+
 // ACCTUAL GAME CODE
-function yourFunction(){
-    console.log("hello jd")
+
+var canvas = document.getElementById('canvas');
+var ctx = canvas.getContext('2d');
+
+const initialState = {
+  ballX: 500,
+  ballY: 300,
+  ballXmomentum: 0,
+  ballYmomentum: 0,
+
+  player1X: 100,
+  player1Y: 300,
+  player1Xmomentum: 0,
+  player1Ymomentum: 0,
+
+  player2X: 900,
+  player2Y: 300,
+  player2Xmomentum: 0,
+  player2Ymomentum: 0,
+
+  player1points: 0,
+  player2points: 0,
+}
+
+let s = initialState // s as state
+
+
+
+function gameLoop(){
     if(dc){
-      console.log("hello jd321")
       value = "//move"
       dc.send(value)
       addMSG(value, "me");
       $("#msg").val('');
     }
-    setTimeout(yourFunction, 5000);
+
+    // drawing
+    drawBackground();
+    drawPlayers();
+    drawNets();
+    drawBall();
+
+    setTimeout(gameLoop, 1000/60);
 }
-yourFunction();
+gameLoop();
 console.log("hello jd123")
